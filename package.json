@@ -1,0 +1,27 @@
+{
+  "name": "redis-pub-sub",
+  "version": "0.0.1",
+  "description": "Exposing pub sub methods from redis",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "test": "npm run build && ./node_modules/mocha/bin/_mocha 'dist/**/*.test.js' "
+  },
+  "keywords": [],
+  "author": "Adam Johnston",
+  "license": "ISC",
+  "dependencies": {
+    "create-subject-with-filter": "0.0.5",
+    "redis": "^2.8.0"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.1.0"
+  }
+}
