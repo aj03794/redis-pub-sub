@@ -1,6 +1,6 @@
 {
   "name": "pub-sub-redis",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Exposing pub sub methods from redis",
   "main": "dist/index.js",
   "scripts": {
