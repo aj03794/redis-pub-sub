@@ -27,7 +27,7 @@ export const getClient = ({
 							// reconnect after
 							return Math.min(options.attempt * 100, 5000);
 						},
-						host: process.env.IP_ADDRESS || '127.0.0.1',
+						host: process.env[2] === 'dev' ? '127.0.0.1' : 'main.local',
 						port: 6379
 					})
 				})
