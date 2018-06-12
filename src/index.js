@@ -42,9 +42,9 @@ export const getClient = ({
 export const setClient = ({ type, client, clients }) => clients[type] = client
 
 export const redis = ({
-	clients = {},
+	clients= {},
 	host= '127.0.0.1',
-	port=6379
+	port= 6379
 }) => {
 	return {
 		publisherCreator: () => new Promise(resolve => {
