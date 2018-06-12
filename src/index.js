@@ -3,7 +3,9 @@ import { createSubject } from 'create-subject-with-filter'
 
 export const getClient = ({
 	type,
-	clients
+	clients,
+	host,
+	port
 }) => {
 	return {
 		connect: () => new Promise(resolve => {
@@ -27,8 +29,8 @@ export const getClient = ({
 							// reconnect after
 							return Math.min(options.attempt * 100, 5000);
 						},
-						host: process.env[2] === 'dev' ? '127.0.0.1' : 'main.local',
-						port: 6379
+						host,
+						port
 					})
 				})
 			}
@@ -39,12 +41,14 @@ export const getClient = ({
 
 export const setClient = ({ type, client, clients }) => clients[type] = client
 
-export const redis = (
-	clients = {}
-) => {
+export const redis = ({
+	clients = {},
+	host= '127.0.0.1',
+	port=6379
+}) => {
 	return {
 		publisherCreator: () => new Promise(resolve => {
-			const { connect } = getClient({ type: 'publisher', clients })
+			const { connect } = getClient({ type: 'publisher', clients, host, port })
 			return connect().then(client => {
 				client.on('error', (...args) => {
 					console.log('publish - error', args)
@@ -67,7 +71,7 @@ export const redis = (
 			})
 		}),
 		subscriberCreator: () => new Promise(resolve => {
-			const { connect } = getClient({ type: 'subscriber', clients })
+			const { connect } = getClient({ type: 'subscriber', clients, host, port })
 			return connect().then(client => {
 				const {
 					subscribe: allMsgs,
